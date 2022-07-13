@@ -1,0 +1,9 @@
+com\oracle\ocm\events\beans\EventSource.class
+com\oracle\ocm\events\beans\User.class
+com\oracle\ocm\events\beans\EventTarget.class
+com\oracle\ocm\events\EventsResource$1.class
+com\oracle\ocm\events\HelloApplication.class
+com\oracle\ocm\events\beans\EventData.class
+com\oracle\ocm\events\EventsResource.class
+com\oracle\ocm\events\BroadcasterResource.class
+com\oracle\ocm\events\beans\EventType.class

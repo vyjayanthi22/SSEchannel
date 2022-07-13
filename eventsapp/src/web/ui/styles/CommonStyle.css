@@ -1,0 +1,12 @@
+.mydiv {
+  background: lightgray;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  margin: 10px;
+}
+
+.mydivcontainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Broadcast DashBoard</title>
+    <style>
+        table, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<h1>Broadcast Dashboard</h1>
+<table id="broadcastTable">
+    <tr>
+        <th>Event Id</th>
+        <th>Event Time</th>
+        <th>Event Name</th>
+        <th>Event Type</th>
+        <th>Event Source</th>
+        <th>Event Target</th>
+        <th>Event Message</th>
+    </tr>
+</table>
+
+<script>
+    var button = document.querySelector('button');
+    var evtSource = new EventSource('/EventsApp/api/broadcast/events/subscribe');
+    console.log(evtSource.withCredentials);
+    console.log(evtSource.readyState);
+    console.log(evtSource.url);
+
+    evtSource.onopen = function() {
+        console.log("Connection to server opened.");
+        console.log(evtSource.readyState);
+
+    };
+
+    evtSource.onmessage = function(e) {
+        const eventJsonObject = JSON.parse(e.data);
+        console.log("MSG received.");
+        var table = document.getElementById("broadcastTable");
+        var row = table.insertRow(1);
+        var idCol = row.insertCell(0);
+        var timeCol = row.insertCell(1);
+        var nameCol = row.insertCell(2);
+        var typeCol = row.insertCell(3);
+        var sourceCol = row.insertCell(4);
+        var targetCol = row.insertCell(5);
+        var messageCol = row.insertCell(6);
+        idCol.textContent = eventJsonObject.id;
+        var dateTime = new Date(eventJsonObject.eventTime);
+        timeCol.textContent = dateTime.toString();
+        nameCol.textContent = eventJsonObject.name;
+        typeCol.textContent = eventJsonObject.eventType;
+        sourceCol.textContent = eventJsonObject.eventSource;
+        targetCol.textContent = eventJsonObject.eventTarget;
+        var message = JSON.stringify(eventJsonObject.message);
+        messageCol.textContent = message;
+    };
+
+    evtSource.onerror = function() {
+        console.log("EventSource failed.");
+        console.log(evtSource.readyState);
+    };
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SSE Event</title>
+</head>
+<body>
+<h1>Getting server updates</h1>
+<div id="result"></div>
+
+<script>
+  if(typeof(EventSource) !== "undefined") {
+    var source = new EventSource("/EventsApp/api/sse");
+    source.onmessage = function(event) {
+          // alert('connection is opened.'+source.readyState);
+          document.getElementById("result").innerHTML += event.data + "<br>";
+      };
+
+  } else {
+    document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events...";
+  }
+</script>
+
+
+</body>
+</html>
